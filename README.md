@@ -10,8 +10,8 @@ return array(
 ...
 
   'yiisoft/yii2-ktgenerator' =>
-		  array(
-			  'name' => 'yiisoft/yii2-ktgenerator',
+    array(
+    'name' => 'yiisoft/yii2-ktgenerator',
 			  'version' => '0.01',
 			  'alias' =>
 				  array(
@@ -19,4 +19,14 @@ return array(
 				  ),
 		  ),
 );
+```
+
+- add this to config
+
+```
+'modules' => [
+    'ktgenerator' => [
+    'class' => 'yii\ktgenerator\KTGenerator',
+  ],
+],
 ```
