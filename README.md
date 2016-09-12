@@ -9,15 +9,15 @@
 return array(
 ...
 
-  'yiisoft/yii2-ktgenerator' =>
-    array(
-    'name' => 'yiisoft/yii2-ktgenerator',
-			  'version' => '0.01',
-			  'alias' =>
-				  array(
-					  '@yii/ktgenerator' => $vendorDir . '/yiisoft/yii2-ktgenerator',
-				  ),
-		  ),
+    'yiisoft/yii2-ktgenerator' =>
+        array(
+            'name' => 'yiisoft/yii2-ktgenerator',
+            'version' => '0.01',
+            'alias' =>
+                array(
+                    '@yii/ktgenerator' => $vendorDir . '/yiisoft/yii2-ktgenerator',
+                ),
+        ),
 );
 ```
 
@@ -26,7 +26,7 @@ return array(
 ```
 'modules' => [
     'ktgenerator' => [
-    'class' => 'yii\ktgenerator\KTGenerator',
-  ],
+        'class' => 'yii\ktgenerator\KTGenerator',
+    ],
 ],
 ```
