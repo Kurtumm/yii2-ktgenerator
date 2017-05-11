@@ -349,6 +349,8 @@ class Generator extends \yii\gii\Generator
                 continue;
             }
             $refClassName = $this->generateClassName($refTable);
+            $rc = explode('Master', $refClassName);
+            $refClassName = $rc[0];
             unset($refs[0]);
             $attributes = implode("', '", array_keys($refs));
             $targetAttributes = [];
