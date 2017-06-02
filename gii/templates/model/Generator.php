@@ -224,10 +224,16 @@ class Generator extends \yii\gii\Generator
             $files[] = new CodeFile(
             Yii::getAlias('@' . str_replace('\\', '/', $this->ns)) . '/' . $modelClassName . '.php', $this->render('model.php', $params)
             );
-
+            $handle = fopen('/tmp/query-file', 'w+');
+            fwrite($handle, Yii::getAlias('@' . str_replace('\\', '/', $this->queryNs)) . '/' . $queryClassName . '.php');
+            fclose($handle);
             // query :
             if ($queryClassName) {
+//                $qcn = explode('Master', $queryClassName);
+//                $queryClassName = implode('', $qcn);
                 $params['className'] = $queryClassName;
+//                $mcn = explode('Master', $modelClassName);
+//                $modelClassName = implode('', $mcn);
                 $params['modelClassName'] = $modelClassName;
                 $files[] = new CodeFile(
                 Yii::getAlias('@' . str_replace('\\', '/', $this->queryNs)) . '/' . $queryClassName . '.php', $this->render('query.php', $params)

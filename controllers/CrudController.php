@@ -45,8 +45,9 @@ class CrudController extends \yii\web\Controller
                 $generator->baseControllerClass = $_POST['CrudGenerator']['baseControllerClass'];
                 $generator->enablePjax = 1;
                 $generator->searchModelClass = $searchModelClass;
-                $generator->templates['backend'] = Yii::getAlias('@backend/modules/KTGenerator/gii/templates/crud/backend');
+                $generator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3');
                 $generator->template = 'backend';
+                $generator->enablePjax = true;
 
                 $fs = $generator->generate();
                 $answers = [];

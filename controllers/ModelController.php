@@ -57,8 +57,10 @@ class ModelController extends \yii\web\Controller
                     $generator2->modelClass = $modelClass;
                     $generator2->ns = $modelNameSpace;
                     $generator2->baseClass = $generator->ns . '\\' . $generator->modelClass;
-                    $generator2->templates['extends'] = Yii::getAlias('@backend/modules/KTGenerator/gii/templates/model/extends');
+                    $generator2->templates['extends'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/model/extends');
                     $generator2->template = 'extends';
+                    $generator2->generateQuery = true;
+                    $generator2->queryNs = $modelNameSpace.'\query';
                     $files2 = $generator2->generate();
                     $answers2 = [];
                     foreach ($files2 as $file2) {

@@ -18,6 +18,10 @@ namespace <?= $generator->ns ?>;
 
 use Yii;
 use <?= '\\' . ltrim($generator->baseClass, '\\') ?>;
+<?php if ($queryClassName):
+    $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName;
+    echo 'use '.$queryClassFullName.';';
+endif; ?>
 
 /**
 * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -33,7 +37,7 @@ use <?= '\\' . ltrim($generator->baseClass, '\\') ?>;
 <?php endif; ?>
 */
 
-class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') ?>
+class <?= $className ?> extends <?= $generator->modelClass?>Master
 {
     /**
     * @inheritdoc
@@ -50,4 +54,15 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') ?>
     {
         return array_merge(parent::attributeLabels(), []);
     }
+
+<?php if ($queryClassName): ?>
+    /**
+    * @inheritdoc
+    * @return <?= $queryClassFullName ?> the active query used by this AR class.
+    */
+    public static function find()
+    {
+        return new <?= $queryClassName ?>(get_called_class());
+    }
+<?php endif; ?>
 }
