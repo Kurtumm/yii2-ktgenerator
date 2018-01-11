@@ -62,7 +62,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         if (++$count < 6) {
             echo "            \t\t'" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
         } else {
-            echo "            // '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+            echo "            \t\t// '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
         }
     }
 }
@@ -82,5 +82,5 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 <?php endif; ?>
         </div>
     </div>
-    <?='<?php Pjax::end();?>'?>
+    <?='<?php Pjax::end();?>'."\n"?>
 </div>

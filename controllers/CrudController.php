@@ -13,6 +13,7 @@ class CrudController extends \yii\web\Controller
     {
         $model = new CrudGenerator();
         $tables = [];
+        $baseControllerClass = 'yii\web\Controller';
 
         if (isset($_POST['CrudGenerator'])) {
 
@@ -20,9 +21,12 @@ class CrudController extends \yii\web\Controller
             fwrite($handle, print_r($_POST['CrudGenerator'], true));
             fclose($handle);
 
-            $modelPath = \Yii::getAlias($_POST['CrudGenerator']['modelPath']);
-            $modelNameSpace = $_POST['CrudGenerator']['modelNamespace'];
-            $controllerNameSpace = $_POST['CrudGenerator']['controllerNamespace'];
+            $model->attributes = $_POST['CrudGenerator'];
+            $baseControllerClass = $_POST['baseControllerClass'];
+
+            $modelPath = \Yii::getAlias($model->modelPath);
+            $modelNameSpace = $model->modelNamespace;
+            $controllerNameSpace = $model->controllerNamespace;
             $files = scandir($modelPath);
             foreach ($files as $file) {
                 if ($file == '.' || $file == '..' || substr($file, -4, 4) != '.php') {
@@ -36,18 +40,22 @@ class CrudController extends \yii\web\Controller
                 $modelClass = $modelNameSpace . '\\' . $modelName;
                 $controllerClass = $controllerNameSpace . '\\' . $modelName . 'Controller';
                 $searchModelClass = $modelNameSpace.'\search\\'.$modelName;
-//                echo $modelClass . '<br />';
-//                echo $controllerClass . '<br />';
 
                 $generator = new Generator();
                 $generator->modelClass = $modelClass;
                 $generator->controllerClass = $controllerClass;
-                $generator->baseControllerClass = $_POST['CrudGenerator']['baseControllerClass'];
+                $generator->baseControllerClass = $baseControllerClass;
                 $generator->enablePjax = 1;
                 $generator->searchModelClass = $searchModelClass;
                 $generator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3');
                 $generator->template = 'backend';
                 $generator->enablePjax = true;
+
+                /**
+                 * viewPath
+                 */
+                $viewPaths = explode('\\', $controllerClass);
+                $generator->viewPath = '@'.$viewPaths[0].'/views/'.$generator->getControllerID();
 
                 $fs = $generator->generate();
                 $answers = [];
@@ -68,7 +76,7 @@ class CrudController extends \yii\web\Controller
             }
         }
 
-        return $this->render('index', compact('model', 'tables'));
+        return $this->render('index', compact('model', 'tables', 'baseControllerClass'));
     }
 
 }

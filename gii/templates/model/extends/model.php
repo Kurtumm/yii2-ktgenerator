@@ -17,7 +17,10 @@ echo "<?php\n";
 namespace <?= $generator->ns ?>;
 
 use Yii;
-use <?= '\\' . ltrim($generator->baseClass, '\\') ?>;
+<?php
+$bc = $generator->modelClass.'Model';
+?>
+use <?= '\\' . ltrim($generator->baseClass, '\\') ?> as <?=$bc?>;
 <?php if ($queryClassName):
     $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName;
     echo 'use '.$queryClassFullName.';';
@@ -37,7 +40,7 @@ endif; ?>
 <?php endif; ?>
 */
 
-class <?= $className ?> extends <?= $generator->modelClass?>Master
+class <?= $className ?> extends <?= $bc."\n"?>
 {
     /**
     * @inheritdoc

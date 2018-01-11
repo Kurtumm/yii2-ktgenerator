@@ -4,26 +4,27 @@ namespace yii\ktgenerator\controllers;
 
 use yii\ktgenerator\models\ModelGenerator;
 use Yii;
-//use yii\gii\generators\model\Generator;
-use yii\ktgenerator\gii\templates\model\Generator;
+//use yii\ktgenerator\gii\templates\model\Generator;
+use yii\gii\generators\model\Generator;
 
 class ModelController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $model = new ModelGenerator();
-        $model->dbName = 'db';
+        $model = new Generator();
+        $model->db = 'db';
         $tables = [];
         $tmp = NULL;
+        $folderName = '';
 
-        if (isset($_POST['ModelGenerator'])) {
+        if (isset($_POST['Generator'])) {
             $tables = [];
-            $connectionName = $_POST['ModelGenerator']['dbName'];
-            $model->nameSpace = $_POST['ModelGenerator']['nameSpace'];
-            $model->folderName = $_POST['ModelGenerator']['folderName'];
-            $model->baseClass = $_POST['ModelGenerator']['baseClass'];
+            $connectionName = $_POST['Generator']['db'];
+            $model->ns = $_POST['Generator']['ns'];
+            $folderName = $_POST['folderName'];
+            $model->baseClass = $_POST['Generator']['baseClass'];
 
-            $modelNameSpace = $model->nameSpace . '\\' . $model->folderName;
+            $modelNameSpace = $model->ns . '\\' . $folderName;
 
             $connection = Yii::$app->{$connectionName};
 
@@ -40,7 +41,7 @@ class ModelController extends \yii\web\Controller
                     $generator = new Generator();
                     $generator->db = $connectionName;
                     $generator->tableName = $tableName;
-                    $generator->modelClass = $modelClass . 'Master';
+                    $generator->modelClass = $modelClass;
                     $generator->ns = $modelNameSpace . '\master';
 //                    $generator->baseClass = $modelNameSpace . '\ModelMaster';
                     $generator->baseClass = $model->baseClass;
@@ -102,7 +103,7 @@ class ModelController extends \yii\web\Controller
         }
 
 
-        return $this->render('index', compact('model', 'tables', 'tmp'));
+        return $this->render('index', compact('model', 'tables', 'tmp', 'folderName'));
     }
 
 }

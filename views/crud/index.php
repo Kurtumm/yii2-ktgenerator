@@ -1,5 +1,6 @@
 <?php
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 ?>
 <p>
     <a href="<?=Yii::$app->homeUrl?>ktgenerator" class="btn btn-default">&lt;&lt; Go Back To KT Generator</a>
@@ -15,7 +16,13 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'modelPath')->hint('Ex. @app/models/'); ?>
             <?= $form->field($model, 'modelNamespace')->hint('Ex. app\models\\'); ?>
             <?= $form->field($model, 'controllerNamespace')->hint('Ex. app\controllers\\'); ?>
-            <?= $form->field($model, 'baseControllerClass')->hint('Ex. yii\web\Controller'); ?>
+            <?//= $form->field($model, 'baseControllerClass')->hint('Ex. yii\web\Controller'); ?>
+            <div class="form-group">
+                <label class="control-label" for="generator-baseclass">Folder name</label>
+                <?= Html::input('text', 'baseControllerClass', $baseControllerClass, ['class'=>'form-control'])?>
+                <div class="hint-block">Ex. <?=$baseControllerClass?></div>
+                <div class="help-block"></div>
+            </div>
 
             <?= \yii\helpers\Html::submitButton('Generate', ['class' => 'btn btn-primary', 'name' => 'preview']) ?>
 

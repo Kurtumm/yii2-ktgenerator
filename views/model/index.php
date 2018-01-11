@@ -1,5 +1,6 @@
 <?php
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 ?>
 <p>
     <a href="<?=Yii::$app->homeUrl?>ktgenerator" class="btn btn-default">&lt;&lt; Go Back To KT Generator</a>
@@ -12,10 +13,16 @@ use yii\widgets\ActiveForm;
         <div class="panel-body">
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'dbName')->hint('db is default value'); ?>
-            <?= $form->field($model, 'nameSpace')->hint('Ex. app\models'); ?>
+            <?= $form->field($model, 'db')->hint('db is default value'); ?>
+            <?= $form->field($model, 'ns')->hint('Ex. app\models'); ?>
             <?= $form->field($model, 'baseClass')->hint('Ex. app\models\ModelMaster'); ?>
-            <?= $form->field($model, 'folderName')->hint('all model files will save in this folder'); ?>
+            <?//= $form->field($model, 'folderName')->hint('all model files will save in this folder'); ?>
+            <div class="form-group">
+                <label class="control-label" for="generator-baseclass">Folder name</label>
+                <?= Html::input('text', 'folderName', $folderName, ['class'=>'form-control'])?>
+                <div class="hint-block">Ex. folderName</div>
+                <div class="help-block"></div>
+            </div>
 
             <?= \yii\helpers\Html::submitButton('Generate', ['class' => 'btn btn-primary', 'name' => 'preview']) ?>
 
