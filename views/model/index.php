@@ -23,6 +23,12 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
+    <?php if($tmp):?>
+        <div>
+            <?php print_r($tmp)?>
+        </div>
+    <?php endif;?>
+
 
     <?php if ($tables !== []): ?>
 

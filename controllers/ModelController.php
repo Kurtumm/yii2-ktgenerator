@@ -14,6 +14,7 @@ class ModelController extends \yii\web\Controller
         $model = new ModelGenerator();
         $model->dbName = 'db';
         $tables = [];
+        $tmp = NULL;
 
         if (isset($_POST['ModelGenerator'])) {
             $tables = [];
@@ -43,6 +44,9 @@ class ModelController extends \yii\web\Controller
                     $generator->ns = $modelNameSpace . '\master';
 //                    $generator->baseClass = $modelNameSpace . '\ModelMaster';
                     $generator->baseClass = $model->baseClass;
+
+                    $tmp = $generator->templates;
+
                     $files = $generator->generate();
                     $answers = [];
                     foreach ($files as $file) {
@@ -98,7 +102,7 @@ class ModelController extends \yii\web\Controller
         }
 
 
-        return $this->render('index', compact('model', 'tables'));
+        return $this->render('index', compact('model', 'tables', 'tmp'));
     }
 
 }
