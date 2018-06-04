@@ -22,7 +22,8 @@ class CrudController extends \yii\web\Controller
             fclose($handle);
 
             $model->attributes = $_POST['CrudGenerator'];
-            $baseControllerClass = $_POST['baseControllerClass'];
+            $model->baseControllerClass = $_POST['CrudGenerator']['baseControllerClass'];
+            $model->viewPath = $_POST['CrudGenerator']['viewPath'];
 
             $modelPath = \Yii::getAlias($model->modelPath);
             $modelNameSpace = $model->modelNamespace;
@@ -45,17 +46,20 @@ class CrudController extends \yii\web\Controller
                 $generator->modelClass = $modelClass;
                 $generator->controllerClass = $controllerClass;
                 $generator->baseControllerClass = $baseControllerClass;
-                $generator->enablePjax = 1;
                 $generator->searchModelClass = $searchModelClass;
                 $generator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3');
                 $generator->template = 'backend';
                 $generator->enablePjax = true;
 
-                /**
-                 * viewPath
-                 */
-                $viewPaths = explode('\\', $controllerClass);
-                $generator->viewPath = '@'.$viewPaths[0].'/views/'.$generator->getControllerID();
+                if(!empty($_POST['CrudGenerator']['viewPath'])) {
+                    $generator->viewPath = $_POST['CrudGenerator']['viewPath'].DIRECTORY_SEPARATOR.$generator->getControllerID();
+                } else {
+                    /**
+                     * viewPath
+                     */
+                    $viewPaths = explode('\\', $controllerClass);
+                    $generator->viewPath = '@'.$viewPaths[0].'/views/'.$generator->getControllerID();
+                }
 
                 $fs = $generator->generate();
                 $answers = [];

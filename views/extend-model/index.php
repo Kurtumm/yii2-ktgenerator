@@ -6,32 +6,35 @@ use yii\helpers\Html;
     <a href="<?=Yii::$app->homeUrl?>ktgenerator" class="btn btn-default">&lt;&lt; Go Back To KT Generator</a>
 </p>
 <div class="ModelGenerator-default-index">
-    <h1 class="page-header">CRUD Generator</h1>
-    
+    <h1 class="page-header">Extend Model Generator</h1>
+
     <div class="panel panel-default">
         <div class="panel-heading">Form</div>
         <div class="panel-body">
             <?php $form = ActiveForm::begin(); ?>
 
-            <?= $form->field($model, 'modelPath')->hint('Ex. @app/models/'); ?>
-            <?= $form->field($model, 'modelNamespace')->hint('Ex. app\models\\'); ?>
-            <?= $form->field($model, 'controllerNamespace')->hint('Ex. app\controllers\\'); ?>
-            <?= $form->field($model, 'baseControllerClass')->hint('Ex. yii\web\Controller, common\controllers\MasterController'); ?>
-            <?= $form->field($model, 'viewPath')->hint('Ex. @app/views/post, @app/modules/views/post'); ?>
-            <?php /*
+            <?= $form->field($model, 'db')->hint('db is default value'); ?>
+            <?= $form->field($model, 'ns')->hint('Ex. frontend\models')->label('Target Model'); ?>
+            <?= $form->field($model, 'baseClass')->hint('Ex. common\models')->label('Base Model'); ?>
+            <?//= $form->field($model, 'folderName')->hint('all model files will save in this folder'); ?>
             <div class="form-group">
                 <label class="control-label" for="generator-baseclass">Folder name</label>
-                <?= Html::input('text', 'baseControllerClass', $baseControllerClass, ['class'=>'form-control'])?>
-                <div class="hint-block">Ex. <?=$baseControllerClass?></div>
+                <?= Html::input('text', 'folderName', $folderName, ['class'=>'form-control'])?>
+                <div class="hint-block">Ex. folderName</div>
                 <div class="help-block"></div>
             </div>
-            */?>
 
             <?= \yii\helpers\Html::submitButton('Generate', ['class' => 'btn btn-primary', 'name' => 'preview']) ?>
 
             <?php ActiveForm::end(); ?>
         </div>
     </div>
+
+    <?php if($tmp):?>
+        <div>
+            <?php print_r($tmp)?>
+        </div>
+    <?php endif;?>
 
 
     <?php if ($tables !== []): ?>
@@ -42,15 +45,16 @@ use yii\helpers\Html;
 
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <th>Model Class</th>
-                        <th>Search Model Class</th>
-                        <th>Controller Class</th>
+                        <th>Base Model</th>
+                        <th>Model</th>
+                        <th>Search Model</th>
                     </tr>
                     <?php foreach ($tables as $table): ?>
                         <tr>
-                            <td><?= $table['modelClass'] ?></td>
-                            <td><?= $table['searchModelClass'] ?></td>
-                            <td><?= $table['controllerClass'] ?></td>
+                            <td><?= $table['model'] ?></td>
+                            <td><?= $table['baseClass'] ?></td>
+                            <td><?= $table['targetClass'] ?></td>
+                            <td><?= $table['searchModel'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>

@@ -19,6 +19,7 @@ class CrudGenerator extends Model
     public $baseControllerClass = 'yii\web\Controller';
     public $widget;
     public $templates;
+    public $viewPath;
 
     public function attributeLabels()
     {
@@ -29,6 +30,7 @@ class CrudGenerator extends Model
             'baseControllerClass'=>'Base Controller Class',
             'widget'=>'Widget',
             'templates'=>'Templates',
+            'viewPath'=>'View Path',
         ];
     }
 

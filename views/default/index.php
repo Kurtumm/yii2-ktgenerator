@@ -18,5 +18,14 @@
                 <a href="<?=\yii\helpers\Url::to('ktgenerator/crud')?>" class="btn btn-success btn-block">Go!!</a>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="thumbnail text-center">
+                <h1>Extend Model Generator</h1>
+                <p>
+                    Generate all extend model
+                </p>
+                <a href="<?=\yii\helpers\Url::to('ktgenerator/extend-model')?>" class="btn btn-warning btn-block">Go!!</a>
+            </div>
+        </div>
     </div>
 </div>
