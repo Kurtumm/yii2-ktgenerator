@@ -45,6 +45,7 @@ class ModelController extends \yii\web\Controller
                     $generator->ns = $modelNameSpace . '\master';
 //                    $generator->baseClass = $modelNameSpace . '\ModelMaster';
                     $generator->baseClass = $model->baseClass;
+                    $generator->templates['default'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/model/default');
 
                     $tmp = $generator->templates;
 

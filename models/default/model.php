@@ -24,12 +24,10 @@ use Yii;
 
 <?php
 $extendNs = substr($generator->ns, 0, -6);
-$lastRelation = '';
 ?>
+
 <?php foreach ($relations as $name => $relation): ?>
-<?php if($lastRelation == $relation['1']) continue;?>
-use <?= $extendNs.$relation[1]." as {$relation[1]}Model;\n"?>
-<?php $lastRelation = $relation[1];?>
+use <?= $extendNs.$relation[1]."\n"?>;
 <?php endforeach; ?>
 
 /**
@@ -91,7 +89,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function get<?= $name ?>()
     {
-        <?= str_replace('::', 'Model::', $relation[0]) . "\n" ?>
+        <?= $relation[0] . "\n" ?>
     }
 <?php endforeach; ?>
 <?php if ($queryClassName): ?>
