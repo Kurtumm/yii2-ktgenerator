@@ -14,6 +14,10 @@ class CrudController extends \yii\web\Controller
         $model = new CrudGenerator();
         $tables = [];
         $baseControllerClass = 'yii\web\Controller';
+        $templates = [
+            'bootstrap3'=>Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3'),
+            'bootstrap4'=>Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap4'),
+        ];
 
         if (isset($_POST['CrudGenerator'])) {
 

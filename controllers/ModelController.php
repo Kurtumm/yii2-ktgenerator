@@ -13,6 +13,7 @@ class ModelController extends \yii\web\Controller
     {
         $model = new Generator();
         $model->db = 'db';
+        $model->ns = 'common\models';
         $tables = [];
         $tmp = NULL;
         $folderName = '';

@@ -14,8 +14,8 @@ use yii\helpers\Html;
             <?php $form = ActiveForm::begin(); ?>
 
             <?= $form->field($model, 'db')->hint('db is default value'); ?>
-            <?= $form->field($model, 'ns')->hint('Ex. app\models'); ?>
-            <?= $form->field($model, 'baseClass')->hint('Ex. app\models\ModelMaster'); ?>
+            <?= $form->field($model, 'ns')->hint('Ex. common\models'); ?>
+            <?= $form->field($model, 'baseClass')->hint('Ex. common\models\ModelMaster, yii\db\ActiveRecord'); ?>
             <?//= $form->field($model, 'folderName')->hint('all model files will save in this folder'); ?>
             <div class="form-group">
                 <label class="control-label" for="generator-baseclass">Folder name</label>

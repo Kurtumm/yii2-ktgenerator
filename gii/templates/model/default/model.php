@@ -24,12 +24,13 @@ use Yii;
 
 <?php
 $extendNs = substr($generator->ns, 0, -6);
-$lastRelation = '';
+$lastRelation = [];
 ?>
 <?php foreach ($relations as $name => $relation): ?>
-<?php if($lastRelation == $relation['1']) continue;?>
+<?php //if($lastRelation == $relation['1']) continue;?>
+<?php if(in_array($relation['1'], $lastRelation)) continue;?>
 use <?= $extendNs.$relation[1]." as {$relation[1]}Model;\n"?>
-<?php $lastRelation = $relation[1];?>
+<?php $lastRelation[] = $relation[1];?>
 <?php endforeach; ?>
 
 /**
