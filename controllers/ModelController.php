@@ -19,11 +19,14 @@ class ModelController extends \yii\web\Controller
         $folderName = '';
 
         if (isset($_POST['Generator'])) {
+            ini_set('max_execution_time', 300);
+
             $tables = [];
             $connectionName = $_POST['Generator']['db'];
             $model->ns = $_POST['Generator']['ns'];
             $folderName = $_POST['folderName'];
             $model->baseClass = $_POST['Generator']['baseClass'];
+            $model->enableI18N = $_POST['Generator']['enableI18N'];
 
             $modelNameSpace = $model->ns . '\\' . $folderName;
 
@@ -47,6 +50,7 @@ class ModelController extends \yii\web\Controller
 //                    $generator->baseClass = $modelNameSpace . '\ModelMaster';
                     $generator->baseClass = $model->baseClass;
                     $generator->templates['default'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/model/default');
+                    $generator->enableI18N = $model->enableI18N;
 
                     $tmp = $generator->templates;
 

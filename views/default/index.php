@@ -6,7 +6,7 @@
                 <p>
                     Generate all master models and extend models
                 </p>
-                <a href="<?=\yii\helpers\Url::to('ktgenerator/model')?>" class="btn btn-primary btn-block">Go!!</a>
+                <a href="<?=\yii\helpers\Url::to('/ktgenerator/model')?>" class="btn btn-primary btn-block">Go!!</a>
             </div>
         </div>
         <div class="col-md-6">
@@ -15,7 +15,7 @@
                 <p>
                     Generate all CRUD
                 </p>
-                <a href="<?=\yii\helpers\Url::to('ktgenerator/crud')?>" class="btn btn-success btn-block">Go!!</a>
+                <a href="<?=\yii\helpers\Url::to('/ktgenerator/crud')?>" class="btn btn-success btn-block">Go!!</a>
             </div>
         </div>
         <div class="col-md-6">
@@ -24,7 +24,7 @@
                 <p>
                     Generate all extend model
                 </p>
-                <a href="<?=\yii\helpers\Url::to('ktgenerator/extend-model')?>" class="btn btn-warning btn-block">Go!!</a>
+                <a href="<?=\yii\helpers\Url::to('/ktgenerator/extend-model')?>" class="btn btn-warning btn-block">Go!!</a>
             </div>
         </div>
     </div>

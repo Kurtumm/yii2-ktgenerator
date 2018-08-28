@@ -8,14 +8,14 @@ use yii\helpers\Html;
 <div class="ModelGenerator-default-index">
     <h1 class="page-header">Model Generator</h1>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Form</div>
-        <div class="panel-body">
-            <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="card card-default">
+        <div class="card-header">Form</div>
+        <div class="card-body">
 
             <?= $form->field($model, 'db')->hint('db is default value'); ?>
             <?= $form->field($model, 'ns')->hint('Ex. common\models'); ?>
-            <?= $form->field($model, 'baseClass')->hint('Ex. common\models\ModelMaster, yii\db\ActiveRecord'); ?>
+            <?= $form->field($model, 'baseClass')->hint('Ex. common\models\MasterModel, yii\db\ActiveRecord'); ?>
             <?//= $form->field($model, 'folderName')->hint('all model files will save in this folder'); ?>
             <div class="form-group">
                 <label class="control-label" for="generator-baseclass">Folder name</label>
@@ -24,11 +24,14 @@ use yii\helpers\Html;
                 <div class="help-block"></div>
             </div>
 
-            <?= \yii\helpers\Html::submitButton('Generate', ['class' => 'btn btn-primary', 'name' => 'preview']) ?>
+            <?= $form->field($model, 'enableI18N')->checkbox()->hint('This indicates whether the generator should generate strings using <code>Yii::t()</code> method. Set this to <code>true</code> if you are planning to make your application translatable.'); ?>
 
-            <?php ActiveForm::end(); ?>
+        </div>
+        <div class="card-footer text-right">
+            <?= \yii\helpers\Html::submitButton('Generate', ['class' => 'btn btn-primary', 'name' => 'preview']) ?>
         </div>
     </div>
+    <?php ActiveForm::end(); ?>
 
     <?php if($tmp):?>
         <div>
@@ -39,9 +42,9 @@ use yii\helpers\Html;
 
     <?php if ($tables !== []): ?>
 
-        <div class="panel panel-default">
-            <div class="panel-heading"></div>
-            <div class="panel-body">
+        <div class="card card-default">
+            <div class="card-heading"></div>
+            <div class="card-body">
 
                 <table class="table table-striped table-bordered">
                     <tr>
