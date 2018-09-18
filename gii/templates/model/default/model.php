@@ -37,7 +37,7 @@ use <?= $extendNs.$relation[1]." as {$relation[1]}Model;\n"?>
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
 <?php foreach ($properties as $property => $data): ?>
- * @property <?= "{$data['type']} \${$property}"  . ($data['comment'] ? ' ' . strtr($data['comment'], ["\n" => ' ']) : '') . "\n" ?>
+ * @property <?= "{$data['type']} \${$property}"  . ($data['comment'] ? ' ' . strtr($data['comment'], ["\n" => ' ', "/*"=>"", "*/"=>""]) : '') . "\n" ?>
 <?php endforeach; ?>
 <?php if (!empty($relations)): ?>
  *
