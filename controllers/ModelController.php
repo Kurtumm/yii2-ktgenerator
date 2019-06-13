@@ -11,6 +11,8 @@ class ModelController extends \yii\web\Controller
 {
     public function actionIndex()
     {
+        ini_set("memory_limit",-1);
+
         $model = new Generator();
         $model->db = 'db';
         $model->ns = 'common\models';

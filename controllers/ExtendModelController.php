@@ -13,6 +13,9 @@ class ExtendModelController extends \yii\web\Controller
 {
     public function actionIndex()
     {
+        ini_set('max_execution_time', 300);
+        ini_set("memory_limit",-1);
+
         $model = new Generator();
         $model->db = 'db';
         $tables = [];
@@ -69,31 +72,34 @@ class ExtendModelController extends \yii\web\Controller
                             true);
                     }
 
-                    //Search Model
-                    $crudGenerator = new CrudGenerator();
-                    $crudGenerator->modelClass = 'common\\models\\'.$folderName.'\\'.$modelClass;
-                    $crudGenerator->controllerClass = 'common\controllers\\' . $modelClass . 'Controller';;
-                    $crudGenerator->baseControllerClass = 'yii\web\Controller\'';
-                    $crudGenerator->searchModelClass = $modelNameSpace . '\search\\' . $modelClass;
-                    $crudGenerator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3');
-                    $crudGenerator->template = 'backend';
-                    $crudGenerator->enablePjax = true;
+                    //check search model not exist
+                    if (!file_exists(Yii::getAlias('@' . str_replace('\\', '/', $generator2->ns)) . '/search/' . $generator2->modelClass . '.php')) {
+                        //Search Model
+                        $crudGenerator = new CrudGenerator();
+                        $crudGenerator->modelClass = 'common\\models\\'.$folderName.'\\'.$modelClass;
+                        $crudGenerator->controllerClass = 'common\controllers\\' . $modelClass . 'Controller';;
+                        $crudGenerator->baseControllerClass = 'yii\web\Controller\'';
+                        $crudGenerator->searchModelClass = $modelNameSpace . '\search\\' . $modelClass;
+                        $crudGenerator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3');
+                        $crudGenerator->template = 'backend';
+                        $crudGenerator->enablePjax = true;
 
-                    $fs = $crudGenerator->generate();
-                    $ffs = [];
-                    $answers = [];
-                    foreach ($fs as $k=>$f) {
-                        $answers[$f->id] = 1;
+                        $fs = $crudGenerator->generate();
+                        $ffs = [];
+                        $answers = [];
+                        foreach ($fs as $k=>$f) {
+                            $answers[$f->id] = 1;
 
-                        if($k != 1)
-                            $f->operation = CodeFile::OP_SKIP;
+                            if($k != 1)
+                                $f->operation = CodeFile::OP_SKIP;
 
-                        $ffs[$k] = $f;
+                            $ffs[$k] = $f;
+                        }
+
+                        $fs = $ffs;
+                        $resultCrud = '';
+                        $crudGenerator->save($fs, $answers, $resultCrud);
                     }
-
-                    $fs = $ffs;
-                    $resultCrud = '';
-                    $crudGenerator->save($fs, $answers, $resultCrud);
 
                     $tables[] = [
                         'baseClass' => $generator2->baseClass,

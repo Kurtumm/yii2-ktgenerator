@@ -11,6 +11,8 @@ class CrudController extends \yii\web\Controller
 {
     public function actionIndex()
     {
+        ini_set("memory_limit",-1);
+
         $model = new CrudGenerator();
         $tables = [];
         $baseControllerClass = 'yii\web\Controller';
@@ -51,7 +53,7 @@ class CrudController extends \yii\web\Controller
                 $generator->controllerClass = $controllerClass;
                 $generator->baseControllerClass = $baseControllerClass;
                 $generator->searchModelClass = $searchModelClass;
-                $generator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap3');
+                $generator->templates['backend'] = Yii::getAlias('@vendor/yiisoft/yii2-ktgenerator/gii/templates/crud/bootstrap4');
                 $generator->template = 'backend';
                 $generator->enablePjax = true;
 
