@@ -106,7 +106,7 @@ class ExtendModelController extends \yii\web\Controller
                         'targetClass' => Yii::getAlias('@' . str_replace('\\', '/',
                                     $generator2->ns)) . '/' . $generator2->modelClass . '.php',
                         'model' => $generator2->modelClass,
-                        'searchModel' => $crudGenerator->searchModelClass
+                        'searchModel' => isset($crudGenerator->searchModelClass) ? $crudGenerator->searchModelClass : '',
                     ];
                 }
             }
